@@ -45,7 +45,7 @@ class GetNews:
         return response
 
 
-class PyMongoDB():
+class PyMongoDB:
     def __init__(cls):
         cls.con = None
         cls.db = None
@@ -86,7 +86,7 @@ class PyMongoDB():
         cls.db.news.update({"subcategory":subcategory},{"$set":{"news":jsonvalue,"category":category}},upsert = True)
 
 
-@app.route('/updateNews',methods=['GET'])
+@app.route('/news/updateNews',methods=['GET'])
 def refreshNews():
     response=None
     try:
@@ -104,15 +104,15 @@ def refreshNews():
 # def sample():
 #     return PyMongoDB.insertData()
 
-@app.route('/getnews',methods=['GET'])
+@app.route('/news/getnews',methods=['GET'])
 def getNewsFromDB():
     return PyMongoDB.getData(request.args.get('subcategory'))
 
-@app.route('/fetchnews',methods=['GET'])
+@app.route('/news/fetchnews',methods=['GET'])
 def getNewsFromApi():
     return GetNews.getNews(request.args.get('subcategory'))
 
-@app.route('/getallcategories',methods=['GET'])
+@app.route('/news/getallcategories',methods=['GET'])
 def getallCategories():
     return PyMongoDB.getCategories()
 
